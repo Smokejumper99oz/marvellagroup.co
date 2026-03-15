@@ -3,19 +3,32 @@
 import Script from "next/script";
 import { useState, useRef } from "react";
 
-const FORMSPREE_ENDPOINT = process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID;
+const FORMSPREE_ENDPOINT =
+  process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID || "mykndnqp";
 const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
-const HAS_RECAPTCHA = RECAPTCHA_SITE_KEY && RECAPTCHA_SITE_KEY !== "your_site_key_here";
+const HAS_RECAPTCHA =
+  RECAPTCHA_SITE_KEY && RECAPTCHA_SITE_KEY !== "your_site_key_here";
 
 export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [validationError, setValidationError] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const form = formRef.current;
-    if (!form || !FORMSPREE_ENDPOINT) return;
+    if (!form) return;
 
+    const name = (form.elements.namedItem("name") as HTMLInputElement)?.value?.trim() ?? "";
+    const email = (form.elements.namedItem("email") as HTMLInputElement)?.value?.trim() ?? "";
+    const message = (form.elements.namedItem("message") as HTMLTextAreaElement)?.value?.trim() ?? "";
+
+    if (!name || !email || !message) {
+      setValidationError(true);
+      return;
+    }
+
+    setValidationError(false);
     setStatus("submitting");
 
     try {
@@ -24,8 +37,25 @@ export function ContactForm() {
       if (HAS_RECAPTCHA) {
         const grecaptcha = (window as any).grecaptcha;
         if (grecaptcha) {
-          const token = await grecaptcha.execute(RECAPTCHA_SITE_KEY!, { action: "contact" });
-          formData.append("g-recaptcha-response", token);
+          const RECAPTCHA_TIMEOUT_MS = 5000;
+          const timeout = () =>
+            new Promise<never>((_, reject) =>
+              setTimeout(() => reject(new Error("reCAPTCHA timeout")), RECAPTCHA_TIMEOUT_MS)
+            );
+          try {
+            const token = await Promise.race([
+              (async () => {
+                await new Promise<void>((resolve) =>
+                  grecaptcha.ready ? grecaptcha.ready(resolve) : resolve()
+                );
+                return grecaptcha.execute(RECAPTCHA_SITE_KEY!, { action: "contact" });
+              })(),
+              timeout(),
+            ]);
+            formData.append("g-recaptcha-response", token);
+          } catch {
+            console.warn("reCAPTCHA failed or timed out; submitting without token");
+          }
         }
       }
 
@@ -41,7 +71,8 @@ export function ContactForm() {
       } else {
         setStatus("error");
       }
-    } catch {
+    } catch (err) {
+      console.error("Contact form error:", err);
       setStatus("error");
     }
   };
@@ -57,6 +88,7 @@ export function ContactForm() {
       <form
         ref={formRef}
         onSubmit={handleSubmit}
+        noValidate
         className="flex flex-col gap-8"
       >
         {/* Honeypot - Formspree silently rejects submissions where bots fill this */}
@@ -114,6 +146,12 @@ export function ContactForm() {
             className="w-full rounded-md bg-white/[0.025] border border-white/12 text-white placeholder:text-white/30 px-4 py-3.5 text-sm shadow-inner shadow-black/20 transition focus:border-cyan-300/50 focus:ring-1 focus:ring-cyan-300/30 focus:outline-none resize-y min-h-[140px] disabled:opacity-60 disabled:cursor-not-allowed"
           />
         </div>
+
+        {validationError && (
+          <p className="text-sm text-red-400/90">
+            Please fill out name, email, and message.
+          </p>
+        )}
 
         {status === "success" && (
           <p className="text-sm text-cyan-300/90">
