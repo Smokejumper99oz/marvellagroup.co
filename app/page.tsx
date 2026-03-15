@@ -4,6 +4,8 @@ const NAV_ITEMS = [
   { label: "Contact", href: "mailto:hello@marvellagroup.com" },
 ];
 
+const PLATFORMS = ["CrewRules™", "HOTcalc™", "FastMX™"];
+
 export default function Page() {
   return (
     <main className="min-h-screen bg-[#02040A] text-white selection:bg-white/20">
@@ -87,6 +89,27 @@ export default function Page() {
                   GROUP
                 </span>
                 <span className="h-[4px] w-24 bg-white/22 sm:w-32" />
+              </div>
+
+              {/* Platforms row — below main logo */}
+              <div
+                id="platforms"
+                className="mt-12 flex flex-col items-center gap-4 marvella-reveal"
+                style={{ animation: "marvella-reveal 0.6s ease-out 1.5s both" }}
+              >
+                <p className="text-[10px] uppercase tracking-[0.35em] text-white/50">
+                  Platforms by Marvella Group™
+                </p>
+                <div className="flex items-center gap-6 text-[14px] font-light text-white/75 sm:text-[16px]">
+                  {PLATFORMS.map((name, i) => (
+                    <span key={name} className="flex items-center gap-6">
+                      <span>{name}</span>
+                      {i < PLATFORMS.length - 1 && (
+                        <span className="h-4 w-px bg-white/30" aria-hidden />
+                      )}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
 
