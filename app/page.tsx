@@ -95,9 +95,9 @@ export default function Page() {
                 <p className="text-[9px] sm:text-[10px] uppercase tracking-[0.3em] sm:tracking-[0.35em] text-white/50">
                   Platforms by Marvella Group™
                 </p>
-                <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 text-[13px] sm:text-[14px] md:text-[16px] font-light text-white/75">
+                <div className="flex flex-row flex-nowrap items-center justify-center gap-3 sm:gap-6 text-[12px] sm:text-[14px] md:text-[16px] font-light text-white/75">
                   {PLATFORMS.map((platform, i) => (
-                    <span key={platform.name} className="flex items-center gap-4 sm:gap-6">
+                    <span key={platform.name} className="flex items-center gap-3 sm:gap-6 shrink-0">
                       <a
                         href={platform.href}
                         target="_blank"
@@ -107,7 +107,7 @@ export default function Page() {
                         {platform.name}
                       </a>
                       {i < PLATFORMS.length - 1 && (
-                        <span className="hidden sm:inline h-4 w-px bg-white/30 shrink-0" aria-hidden />
+                        <span className="h-4 w-px bg-white/30 shrink-0" aria-hidden />
                       )}
                     </span>
                   ))}
