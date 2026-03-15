@@ -45,6 +45,21 @@ body {
   }
 }
 
+/* Contact form: override browser autofill light background when selecting prefilled info */
+.contact-form input:-webkit-autofill,
+.contact-form input:-webkit-autofill:hover,
+.contact-form input:-webkit-autofill:focus,
+.contact-form input:-webkit-autofill:active,
+.contact-form textarea:-webkit-autofill,
+.contact-form textarea:-webkit-autofill:hover,
+.contact-form textarea:-webkit-autofill:focus,
+.contact-form textarea:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.025) inset !important;
+  box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.025) inset !important;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.9) !important;
+  transition: background-color 5000s ease-in-out 0s !important;
+}
+
 /* Marvella universe background — sparse stars */
 .marvella-stars {
   background-image:

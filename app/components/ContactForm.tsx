@@ -56,7 +56,7 @@ export function ContactForm() {
       ref={formRef}
       onSubmit={handleSubmit}
       noValidate
-      className="flex flex-col gap-8"
+      className="contact-form flex flex-col gap-8"
     >
         {/* Honeypot - Formspree silently rejects submissions where bots fill this */}
         <input type="text" name="_gotcha" style={{ display: "none" }} tabIndex={-1} aria-hidden />
