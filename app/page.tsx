@@ -1,5 +1,4 @@
 const NAV_ITEMS = [
-  { label: "Platforms", href: "#platforms" },
   { label: "Build with us", href: "#build-with-us" },
   { label: "Contact", href: "mailto:hello@marvellagroup.com" },
 ];
