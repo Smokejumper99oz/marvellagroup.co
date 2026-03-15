@@ -115,10 +115,10 @@ export default function BuildWithUsPage() {
               ].map((card) => (
                 <div
                   key={card.title}
-                  className="group rounded-[28px] border border-white/10 bg-white/[0.02] shadow-[0_0_120px_rgba(103,232,249,0.06)] overflow-hidden transition-all duration-300 ease-out hover:scale-[1.02] hover:border-white/20 hover:shadow-[0_0_160px_rgba(103,232,249,0.12)]"
+                  className="group rounded-[28px] border border-white/10 bg-white/[0.02] shadow-[0_0_120px_rgba(103,232,249,0.06)] overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_0_140px_rgba(103,232,249,0.08)]"
                 >
                   <div
-                    className="aspect-[16/10] relative bg-white/[0.02] border-b border-white/[0.06] overflow-hidden"
+                    className="aspect-[16/10] relative bg-white/[0.02] border-b border-white/[0.06] overflow-hidden rounded-t-[28px]"
                     aria-hidden
                   >
                     {card.image ? (
@@ -127,7 +127,7 @@ export default function BuildWithUsPage() {
                           src={card.image}
                           alt=""
                           fill
-                          className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                          className="object-cover w-full h-full transition-transform duration-500 ease-out group-hover:scale-105"
                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         />
                         {/* Subtle scanline overlay */}
