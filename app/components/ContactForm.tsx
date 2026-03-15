@@ -6,8 +6,8 @@ import { useState, useRef } from "react";
 const FORMSPREE_ENDPOINT =
   process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID || "mykndnqp";
 const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
-const HAS_RECAPTCHA =
-  RECAPTCHA_SITE_KEY && RECAPTCHA_SITE_KEY !== "your_site_key_here";
+// Disabled: Formspree rejects with invalid-input-response. Use Formspree's built-in spam protection.
+const HAS_RECAPTCHA = false;
 
 export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
@@ -62,14 +62,19 @@ export function ContactForm() {
       const response = await fetch(`https://formspree.io/f/${FORMSPREE_ENDPOINT}`, {
         method: "POST",
         body: formData,
-        headers: { Accept: "application/json" },
+        headers: {
+          Accept: "application/json",
+        },
       });
 
       if (response.ok) {
         setStatus("success");
         form.reset();
       } else {
+        const errorText = await response.text();
+        console.error("Formspree error", response.status, errorText);
         setStatus("error");
+        return;
       }
     } catch (err) {
       console.error("Contact form error:", err);
