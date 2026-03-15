@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   description:
     "Marvella Group builds innovative software, platforms and technology ventures. Creator of CrewRules™, HOTcalc™, and FastMX™.",
   openGraph: {
-    title: "Marvella Group™",
+    title: "Marvella Group™ | Software, Platforms & Technology Ventures",
     description:
       "Marvella Group builds innovative software, platforms and technology ventures. Creator of CrewRules™, HOTcalc™, and FastMX™.",
     url: "https://marvellagroup.co",
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Marvella Group™",
+    title: "Marvella Group™ | Software, Platforms & Technology Ventures",
     description:
       "Software platforms and ventures including CrewRules™, HOTcalc™, and FastMX™.",
     images: ["/meta-marvella.jpg"]
