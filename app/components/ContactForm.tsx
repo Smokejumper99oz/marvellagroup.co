@@ -1,19 +1,18 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { useSearchParams } from "next/navigation";
 
 const FORMSPREE_ENDPOINT =
   process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID || "mykndnqp";
 
 export function ContactForm() {
-  const searchParams = useSearchParams();
-  const showThanks = searchParams.get("thanks") === "1";
   const [validationError, setValidationError] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const form = formRef.current;
     if (!form) return;
@@ -28,20 +27,37 @@ export function ContactForm() {
     }
 
     setValidationError(false);
+    setError(false);
     setSubmitting(true);
-    form.submit();
+
+    try {
+      const formData = new FormData(form);
+      const response = await fetch(`https://formspree.io/f/${FORMSPREE_ENDPOINT}`, {
+        method: "POST",
+        body: formData,
+        headers: { Accept: "application/json" },
+      });
+
+      if (response.ok) {
+        setSuccess(true);
+        form.reset();
+      } else {
+        setError(true);
+      }
+    } catch {
+      setError(true);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
     <form
       ref={formRef}
-      action={`https://formspree.io/f/${FORMSPREE_ENDPOINT}`}
-      method="POST"
       onSubmit={handleSubmit}
       noValidate
       className="flex flex-col gap-8"
     >
-        <input type="hidden" name="_next" value="https://marvellagroup.co/contact?thanks=1" />
         {/* Honeypot - Formspree silently rejects submissions where bots fill this */}
         <input type="text" name="_gotcha" style={{ display: "none" }} tabIndex={-1} aria-hidden />
         <div className="space-y-2">
@@ -95,9 +111,15 @@ export function ContactForm() {
           />
         </div>
 
-        {showThanks && (
+        {success && (
           <p className="text-sm text-cyan-300/90">
             Thanks for your message. We&apos;ll get back to you soon.
+          </p>
+        )}
+
+        {error && (
+          <p className="text-sm text-red-400/90">
+            Something went wrong. Please try again or email us directly.
           </p>
         )}
 
