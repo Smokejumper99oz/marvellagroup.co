@@ -4,7 +4,11 @@ const NAV_ITEMS = [
   { label: "Contact", href: "mailto:hello@marvellagroup.com" },
 ];
 
-const PLATFORMS = ["CrewRules™", "HOTcalc™", "FastMX™"];
+const PLATFORMS = [
+  { name: "CrewRules™", href: "https://crewrules.com" },
+  { name: "HOTcalc™", href: "https://hotcalc.com" },
+  { name: "FastMX™", href: "https://fastmx.us" },
+];
 
 export default function Page() {
   return (
@@ -18,8 +22,13 @@ export default function Page() {
           from { opacity: 0; transform: translateY(10px); }
           to { opacity: 1; transform: translateY(0); }
         }
+        @keyframes marvella-radar-sweep {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
         @media (prefers-reduced-motion: reduce) {
           .marvella-ken-burns, .marvella-reveal { animation: none !important; opacity: 1 !important; transform: none !important; }
+          .marvella-radar-sweep { animation: none !important; opacity: 0 !important; }
         }
       `}</style>
       <div className="relative isolate overflow-hidden">
@@ -61,6 +70,15 @@ export default function Page() {
           />
           <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.18),rgba(0,0,0,0.30)_34%,rgba(0,0,0,0.56)_68%,rgba(0,0,0,0.78)_100%)]" />
 
+          <div
+            className="pointer-events-none absolute inset-0 z-[5] marvella-radar-sweep"
+            style={{
+              background: "conic-gradient(from 0deg at 48% 38%, transparent 0deg, rgba(255,255,255,0.04) 6deg, rgba(147,197,253,0.025) 12deg, transparent 25deg)",
+              animation: "marvella-radar-sweep 18s linear infinite",
+              transformOrigin: "48% 38%",
+            }}
+          />
+
           <div className="relative z-10 mt-[26vh] mx-auto flex max-w-6xl flex-col items-center text-center">
             <div className="relative">
               <p
@@ -101,9 +119,16 @@ export default function Page() {
                   Platforms by Marvella Group™
                 </p>
                 <div className="flex items-center gap-6 text-[14px] font-light text-white/75 sm:text-[16px]">
-                  {PLATFORMS.map((name, i) => (
-                    <span key={name} className="flex items-center gap-6">
-                      <span>{name}</span>
+                  {PLATFORMS.map((platform, i) => (
+                    <span key={platform.name} className="flex items-center gap-6">
+                      <a
+                        href={platform.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="transition hover:text-white/95"
+                      >
+                        {platform.name}
+                      </a>
                       {i < PLATFORMS.length - 1 && (
                         <span className="h-4 w-px bg-white/30" aria-hidden />
                       )}
