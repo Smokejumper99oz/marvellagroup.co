@@ -1,7 +1,5 @@
-const NAV_ITEMS = [
-  { label: "Build with us", href: "#build-with-us" },
-  { label: "Contact", href: "mailto:hello@marvellagroup.com" },
-];
+import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
 
 const PLATFORMS = [
   { name: "CrewRules™", href: "https://crewrules.com" },
@@ -30,28 +28,8 @@ export default function Page() {
           .marvella-radar-sweep { animation: none !important; opacity: 0 !important; }
         }
       `}</style>
-      <div className="relative isolate overflow-hidden">
-        <header className="absolute inset-x-0 top-0 z-30 border-b border-white/[0.04] safe-area-top">
-          <div className="mx-auto flex h-12 sm:h-14 md:h-16 max-w-7xl items-center justify-between px-4 sm:px-6 md:px-8 lg:px-10">
-            <a
-              href="#top"
-              className="text-[10px] sm:text-[11px] uppercase tracking-[0.28em] sm:tracking-[0.32em] text-white/58 transition hover:text-white/78"
-            >
-              Marvella Group™
-            </a>
-            <nav className="flex items-center gap-4 sm:gap-6 md:gap-8">
-              {NAV_ITEMS.map((item) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  className="text-[10px] sm:text-[11px] uppercase tracking-[0.24em] sm:tracking-[0.28em] text-white/48 transition hover:text-white/78 py-2 -my-2"
-                >
-                  {item.label}
-                </a>
-              ))}
-            </nav>
-          </div>
-        </header>
+      <div className="relative isolate overflow-x-hidden">
+        <Header />
 
         <section
           id="top"
@@ -110,7 +88,7 @@ export default function Page() {
 
               {/* Platforms row — below main logo */}
               <div
-                id="platforms"
+                id="build-with-us"
                 className="mt-8 sm:mt-10 md:mt-12 flex flex-col items-center gap-3 sm:gap-4 marvella-reveal"
                 style={{ animation: "marvella-reveal 0.6s ease-out 1.5s both" }}
               >
@@ -140,13 +118,7 @@ export default function Page() {
           </div>
         </section>
 
-        <footer className="relative z-20 px-4 sm:px-6 md:px-8 lg:px-10 pt-16 sm:pt-20 md:pt-24 pb-8 sm:pb-10 safe-area-bottom">
-          <div className="mx-auto flex max-w-6xl flex-col sm:flex-row items-center justify-center sm:justify-between gap-4 text-center sm:text-left">
-            <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] sm:tracking-[0.22em] text-white/34">
-              © 2026 Marvella Group. All rights reserved.
-            </p>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </main>
   );
