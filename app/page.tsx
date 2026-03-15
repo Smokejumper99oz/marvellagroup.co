@@ -31,20 +31,20 @@ export default function Page() {
         }
       `}</style>
       <div className="relative isolate overflow-hidden">
-        <header className="absolute inset-x-0 top-0 z-30 border-b border-white/[0.04]">
-          <div className="mx-auto flex h-12 max-w-7xl items-center justify-between px-6 lg:px-10">
+        <header className="absolute inset-x-0 top-0 z-30 border-b border-white/[0.04] safe-area-top">
+          <div className="mx-auto flex h-12 sm:h-14 md:h-16 max-w-7xl items-center justify-between px-4 sm:px-6 md:px-8 lg:px-10">
             <a
               href="#top"
-              className="text-[11px] uppercase tracking-[0.32em] text-white/58 transition hover:text-white/78"
+              className="text-[10px] sm:text-[11px] uppercase tracking-[0.28em] sm:tracking-[0.32em] text-white/58 transition hover:text-white/78"
             >
               Marvella Group™
             </a>
-            <nav className="flex items-center gap-8">
+            <nav className="flex items-center gap-4 sm:gap-6 md:gap-8">
               {NAV_ITEMS.map((item) => (
                 <a
                   key={item.label}
                   href={item.href}
-                  className="text-[11px] uppercase tracking-[0.28em] text-white/48 transition hover:text-white/78"
+                  className="text-[10px] sm:text-[11px] uppercase tracking-[0.24em] sm:tracking-[0.28em] text-white/48 transition hover:text-white/78 py-2 -my-2"
                 >
                   {item.label}
                 </a>
@@ -78,58 +78,58 @@ export default function Page() {
             }}
           />
 
-          <div className="relative z-10 mt-[26vh] mx-auto flex max-w-6xl flex-col items-center text-center">
+          <div className="relative z-10 mt-[18vh] sm:mt-[22vh] md:mt-[26vh] mx-auto flex max-w-6xl flex-col items-center text-center px-4 sm:px-6">
             <div className="relative">
               <p
-                className="mb-8 text-[11px] uppercase tracking-[0.42em] text-white/80 sm:text-xs marvella-reveal"
+                className="mb-6 sm:mb-8 text-[10px] sm:text-[11px] uppercase tracking-[0.38em] sm:tracking-[0.42em] text-white/80 marvella-reveal"
                 style={{ textShadow: "0 1px 10px rgba(0,0,0,0.6)", animation: "marvella-reveal 0.9s ease-out 0.3s both" }}
               >
                 Software • Platforms • Ventures
               </p>
 
               <h1
-                className="bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(240,245,255,0.92)_25%,rgba(226,232,240,0.85)_50%,rgba(203,213,225,0.78)_75%,rgba(148,163,184,0.72)_100%)] bg-clip-text text-transparent font-light uppercase leading-none tracking-[0.20em] text-[4.5rem] sm:text-[6.5rem] md:text-[8rem] lg:text-[10rem] marvella-reveal"
+                className="bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(240,245,255,0.92)_25%,rgba(226,232,240,0.85)_50%,rgba(203,213,225,0.78)_75%,rgba(148,163,184,0.72)_100%)] bg-clip-text text-transparent font-light uppercase leading-none tracking-[0.16em] sm:tracking-[0.18em] md:tracking-[0.20em] text-[3rem] sm:text-[5rem] md:text-[7rem] lg:text-[9rem] xl:text-[10rem] marvella-reveal"
                 style={{ textShadow: "0 1px 2px rgba(0,0,0,0.28)", animation: "marvella-reveal 1.1s ease-out 0.7s both" }}
               >
                 MARVELLA
               </h1>
 
               <div
-                className="mt-5 flex items-center justify-center gap-5 marvella-reveal"
+                className="mt-4 sm:mt-5 flex items-center justify-center gap-3 sm:gap-5 marvella-reveal"
                 style={{ animation: "marvella-reveal 0.7s ease-out 1.2s both" }}
               >
-                <span className="h-[4px] w-24 bg-white/22 sm:w-32" />
+                <span className="h-[3px] sm:h-[4px] w-12 sm:w-24 md:w-32 bg-white/22 shrink-0" />
                 <span
-                  className="text-[20px] font-light uppercase tracking-[0.32em] text-white/86 sm:text-[20px]"
+                  className="text-[16px] sm:text-[18px] md:text-[20px] font-light uppercase tracking-[0.28em] sm:tracking-[0.32em] text-white/86"
                   style={{ textShadow: "0 1px 8px rgba(0,0,0,0.45)" }}
                 >
                   GROUP
                 </span>
-                <span className="h-[4px] w-24 bg-white/22 sm:w-32" />
+                <span className="h-[3px] sm:h-[4px] w-12 sm:w-24 md:w-32 bg-white/22 shrink-0" />
               </div>
 
               {/* Platforms row — below main logo */}
               <div
                 id="platforms"
-                className="mt-12 flex flex-col items-center gap-4 marvella-reveal"
+                className="mt-8 sm:mt-10 md:mt-12 flex flex-col items-center gap-3 sm:gap-4 marvella-reveal"
                 style={{ animation: "marvella-reveal 0.6s ease-out 1.5s both" }}
               >
-                <p className="text-[10px] uppercase tracking-[0.35em] text-white/50">
+                <p className="text-[9px] sm:text-[10px] uppercase tracking-[0.3em] sm:tracking-[0.35em] text-white/50">
                   Platforms by Marvella Group™
                 </p>
-                <div className="flex items-center gap-6 text-[14px] font-light text-white/75 sm:text-[16px]">
+                <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 text-[13px] sm:text-[14px] md:text-[16px] font-light text-white/75">
                   {PLATFORMS.map((platform, i) => (
-                    <span key={platform.name} className="flex items-center gap-6">
+                    <span key={platform.name} className="flex items-center gap-4 sm:gap-6">
                       <a
                         href={platform.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="transition hover:text-white/95"
+                        className="transition hover:text-white/95 py-2 -my-2 min-h-[44px] min-w-[44px] flex items-center justify-center"
                       >
                         {platform.name}
                       </a>
                       {i < PLATFORMS.length - 1 && (
-                        <span className="h-4 w-px bg-white/30" aria-hidden />
+                        <span className="hidden sm:inline h-4 w-px bg-white/30 shrink-0" aria-hidden />
                       )}
                     </span>
                   ))}
@@ -140,9 +140,9 @@ export default function Page() {
           </div>
         </section>
 
-        <footer className="relative z-20 px-6 pt-24 pb-10 lg:px-10">
-          <div className="mx-auto flex max-w-6xl items-center justify-between">
-            <p className="text-[11px] uppercase tracking-[0.22em] text-white/34">
+        <footer className="relative z-20 px-4 sm:px-6 md:px-8 lg:px-10 pt-16 sm:pt-20 md:pt-24 pb-8 sm:pb-10 safe-area-bottom">
+          <div className="mx-auto flex max-w-6xl flex-col sm:flex-row items-center justify-center sm:justify-between gap-4 text-center sm:text-left">
+            <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] sm:tracking-[0.22em] text-white/34">
               © 2026 Marvella Group. All rights reserved.
             </p>
           </div>
