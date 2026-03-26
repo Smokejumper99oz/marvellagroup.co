@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { ContactForm } from "../components/ContactForm";
+import { ContactTimeBlock } from "../components/ContactTimeBlock";
 
 export const metadata: Metadata = {
   title: "Contact | Marvella Group™",
@@ -150,11 +151,12 @@ export default function ContactPage() {
                   <div className="flex gap-3 items-start">
                     <BusinessContactClockIcon className="size-4 shrink-0 text-cyan-200/38 mt-0.5" />
                     <p className="text-white/70">
-                      Monday - Friday: 9:00 AM - 5:00 PM
+                      Monday – Friday: 9:00 AM – 5:00 PM ET
                       <br />
                       Closed Weekends and Holidays
                     </p>
                   </div>
+                  <ContactTimeBlock />
                 </div>
               </div>
             </div>
