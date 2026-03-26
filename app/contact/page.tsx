@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { SVGProps } from "react";
 import { Suspense } from "react";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
@@ -9,6 +10,64 @@ export const metadata: Metadata = {
   description:
     "Get in touch with Marvella Group. We build innovative software, platforms and technology ventures.",
 };
+
+type IconProps = SVGProps<SVGSVGElement>;
+
+function BusinessContactPhoneIcon({ className, ...props }: IconProps) {
+  return (
+    <svg
+      className={className}
+      aria-hidden
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.25"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+    </svg>
+  );
+}
+
+function BusinessContactMapPinIcon({ className, ...props }: IconProps) {
+  return (
+    <svg
+      className={className}
+      aria-hidden
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.25"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+      <circle cx="12" cy="10" r="2.5" />
+    </svg>
+  );
+}
+
+function BusinessContactClockIcon({ className, ...props }: IconProps) {
+  return (
+    <svg
+      className={className}
+      aria-hidden
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.25"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 7v5l3 2" />
+    </svg>
+  );
+}
 
 export default function ContactPage() {
   return (
@@ -57,6 +116,47 @@ export default function ContactPage() {
               <Suspense fallback={null}>
                 <ContactForm />
               </Suspense>
+            </div>
+
+            <div className="space-y-5 sm:space-y-6">
+              <div className="flex justify-center px-2" aria-hidden>
+                <div className="h-px w-full max-w-xs bg-gradient-to-r from-transparent via-white/[0.14] to-transparent" />
+              </div>
+
+              <div className="rounded-[28px] border border-white/[0.07] bg-white/[0.015] shadow-[0_0_48px_rgba(103,232,249,0.035)] p-6 sm:p-8 md:p-10 space-y-6">
+                <p className="text-xs uppercase tracking-[0.32em] text-cyan-200/55">
+                  Direct contact
+                </p>
+                <div className="space-y-5 text-sm text-white/75 leading-[1.65]">
+                  <div className="flex gap-3 items-center">
+                    <BusinessContactPhoneIcon className="size-4 shrink-0 text-cyan-200/38" />
+                    <a
+                      href="tel:7272480998"
+                      className="text-white/88 transition hover:text-cyan-200/90 focus:outline-none focus-visible:ring-1 focus-visible:ring-cyan-300/40 rounded-sm"
+                    >
+                      727-248-0998
+                    </a>
+                  </div>
+                  <div className="flex gap-3 items-start">
+                    <BusinessContactMapPinIcon className="size-4 shrink-0 text-cyan-200/38 mt-0.5" />
+                    <p className="text-white/70">
+                      1901 Ulmerton Rd
+                      <br />
+                      Suite 625-311
+                      <br />
+                      Clearwater, FL 33762
+                    </p>
+                  </div>
+                  <div className="flex gap-3 items-start">
+                    <BusinessContactClockIcon className="size-4 shrink-0 text-cyan-200/38 mt-0.5" />
+                    <p className="text-white/70">
+                      Monday - Friday: 9:00 AM - 5:00 PM
+                      <br />
+                      Closed Weekends and Holidays
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
